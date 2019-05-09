@@ -22,7 +22,7 @@ def envoyer(texte):
                 client.send(str.encode(texte))
 
 # Début du main
-bind_ip = "192.168.60.45"
+bind_ip = "192.168.0.59"
 bind_port = 9999
 list_of_clients = []
 
