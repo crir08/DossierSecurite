@@ -18,13 +18,24 @@ def thread_connexion():
 
 # Fonction permettant d'envoyer du texte au client. 
 def envoyer(texte):
-        for client in list_of_clients:
-                client.send(str.encode(texte))
+        if "mail" in texte:
+                for client in list_of_clients:
+                        for spamRec in list_of_spam:
+                                nouTexte = texte + " " + spamRec
+                                client.send(str.encode(nouTexte))
+        else:
+                for client in list_of_clients:
+                        client.send(str.encode(texte))
 
 # Début du main
-bind_ip = "192.168.0.59"
+bind_ip = "192.168.60.13"
 bind_port = 9999
 list_of_clients = []
+fichier = open("contact.txt", "r")
+list_of_spam = []
+
+for ligne in fichier:
+        list_of_spam.append(ligne)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
